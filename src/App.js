@@ -1,55 +1,57 @@
-import React from 'react'
-import Button from './components/Button'
-import MathOperations from './components/MathOperations'
+import React, { useState } from 'react'
 import Functions from './components/Functions'
+import Numbers from './components/Numbers'
+import MathOperations from './components/MathOperations'
 import Result from './components/Result'
 import './App.css'
+import words from 'lodash.words'
 
 // Función Flecha o Arrow Function
 const App = () => {
 
-    const clickHandler = (text) => {
-        console.log(text)
-    }
+    const [stack, setStack] = useState('')
 
-    const onClickOperation = (text) => {
-        console.log(text)
+    const items = words(stack, /[^-^+^*^/]+/g)
+    
+    const onClickNumber = (number) => {
+        setStack(`${stack}${number}`)
     }
-
-    const onClickEqual = (text) => {
-        console.log(text)
+    
+    const onClickOperation = (operation) => {
+        setStack(`${stack}${operation}`)
     }
-
-    const OnContentClear = (text) => {
-        console.log(text)
+    
+    const onClickEqual = () => {
+        setStack(eval(stack).toString())
     }
-
-    const OnDelete = (text) => {
-        console.log(text)
+    
+    const OnContentClear = () => {
+        setStack('')
     }
-
+    
+    const OnDelete = () => {
+        const newString = stack.substring(0, stack.length - 1)
+        stack.length > 0
+        ?
+        setStack(newString)
+        :
+        console.log('estado vacio')
+    }
 
     // Lo que ejecuta la función
-    console.log('Renderizacion de App')
+    console.log('Renderizacion de App', items)
+
+    const value = items.length > 0 ? items[items.length - 1] : '0'
 
     return (
         <main className='react-calculator'>
-            <Result value={undefined} />
-            <div className="numbers">
-                <Button text='1' clickHandler={clickHandler} />
-                <Button text='2' clickHandler={clickHandler} />
-                <Button text='3' clickHandler={clickHandler} />
-                <Button text='4' clickHandler={clickHandler} />
-                <Button text='5' clickHandler={clickHandler} />
-                <Button text='6' clickHandler={clickHandler} />
-                <Button text='7' clickHandler={clickHandler} />
-                <Button text='8' clickHandler={clickHandler} />
-                <Button text='9' clickHandler={clickHandler} />
-                <Button text='0' clickHandler={clickHandler} />
-            </div>
-            <Functions 
-            OnDelete={OnDelete}
-            OnContentClear={OnContentClear}
+            <Result value={value} />
+            <Numbers
+                onClickNumber={onClickNumber}
+            />
+            <Functions
+                OnDelete={OnDelete}
+                OnContentClear={OnContentClear}
             />
             <MathOperations
                 onClickOperation={onClickOperation}

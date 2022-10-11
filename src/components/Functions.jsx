@@ -2,12 +2,12 @@ import React from "react";
 import Button from "./Button"
 import PropTypes from 'prop-types'
 
-const Functions = ({ OnContentClear, OnDelete }) => {
+const Functions = ({ OnContentClear, OnDelete}) => {
 
     return (
         <section className="functions">
-            <Button text='clear' clickHandler={OnContentClear} />
-            <Button text='r' clickHandler={OnDelete} />
+            <Button type='button-long-text' text='clear' clickHandler={OnContentClear} />
+            <Button text='&larr;' clickHandler={OnDelete} />
         </section>
     )
 }
