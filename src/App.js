@@ -3,10 +3,9 @@ import Functions from './components/Functions'
 import Numbers from './components/Numbers'
 import MathOperations from './components/MathOperations'
 import Result from './components/Result'
-import './App.css'
 import words from 'lodash.words'
+import './App.css'
 
-// Función Flecha o Arrow Function
 const App = () => {
 
     const [stack, setStack] = useState('')
@@ -37,9 +36,6 @@ const App = () => {
         :
         console.log('estado vacio')
     }
-
-    // Lo que ejecuta la función
-    console.log('Renderizacion de App', items)
 
     const value = items.length > 0 ? items[items.length - 1] : '0'
 
